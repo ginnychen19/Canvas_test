@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字顏色處理</title>
+    <link rel="stylesheet" href="./canvas.css">
+    <script src="./modernizr-1.6.min.js"></script>
+</head>
+
+<body>
+
+    <div class="canvas">
+        <canvas id="canvasOne" width="600" height="600">
+            your browser does not support html5 canvas
+        </canvas>
+    </div>
+    <form>
+        Text:<input id="textBox" placeholder="your text" />
+        <br>
+        填色或線框fillOrStroke :
+        <select id="fillOrStroke">
+            <option value="fill">fill</option>
+            <option value="stroke">stroke</option>
+            <option value="both">both</option>
+        </select> 
+        <br>
+        字體樣式fontStyle :
+        <select id="fontStyle">
+            <option value="normal">normal</option>
+            <option value="italic">italic</option>
+            <option value="oblique">oblique</option>
+        </select> 
+        <br>
+        字型樣式textFont : 
+        <select id="textFont">
+            <option value="serif">serif</option>
+            <option value="sans_serif">sans_serif</option>
+            <option value="cursive">cursive</option>
+            <option value="fantasy">fantasy</option>
+            <option value="monospace">monospace</option>
+        </select> 
+        <br>
+        字體粗細fontWeight :
+        <select id="fontWeight">
+            <option value="normal">normal</option>
+            <option value="bold">bold</option>
+            <option value="bolder">bolder</option>
+            <option value="lighter">lighter</option>
+        </select>
+        <br>
+        字體大小fontSize：
+        <input type="range" id="fontSize" max="300" min="20" value="50">
+        <br>
+        字體顏色fontColor：
+        <input type="color" id="fontColor">
+        <br>
+        字體底線textBaseline：
+        <select id="textBaseline">
+            <option value="middle">middle</option>
+            <option value="top">top</option>
+            <option value="hanging">hanging</option>
+            <option value="alphabetic">alphabetic</option>
+            <option value="ideographi">ideographi</option>
+            <option value="bottom">bottom</option>
+        </select>
+        <br>
+        字體對齊textAlign:
+        <select id="textAlign">
+            <option value="center">center</option>
+            <option value="start">start</option>
+            <option value="end">end</option>
+            <option value="left">left</option>
+            <option value="right">right</option>
+        </select>
+        <br>
+        透明度textAlpha：
+        <input type="range" id="textAlpha" max="1.0" min="0.0" step="0.01" value="1.0">
+        <br>
+        陰影X shadowX：
+        <input type="range" id="shadowX" max="100" min="-100" step="1" value="1">
+        <br>
+        陰影Y shadowY：
+        <input type="range" id="shadowY" max="100" min="-100" step="1" value="1">
+        <br>
+        陰影模糊 shadowblur：
+        <input type="range" id="shadowblur" max="100" min="1" step="1" value="50">
+        <br>
+        陰影顏色 shadowcolor：
+        <input type="color" id="shadowcolor" >
+        <br>
+        陰canvasWidth：
+        <input type="number" id="canvasWidth" max="1000" min="200">
+        <br>
+        陰canvasheigh：
+        <input type="number" id="canvasheigh" max="1000" min="200">
+        <br>
+        陰canvasStyleWidth：
+        <input type="number" id="canvasStyleWidth" max="1000" min="200">
+        <br>
+        陰canvasStyleheigh：
+        <input type="number" id="canvasStyleheigh" max="1000" min="200">
+        <br>
+
+        <input type="button" id = "createImageData" value="匯出圖片">  
+        <br>
+        <textarea id = "ImageDataDisplay" row = "10" cols="30"></textarea>
+    </form>
+</body>
+</htmI>
+</form>
+
+<script type="text/javascript" src="./canvasapp.js"></script>
+
+</body>
+
+</html>

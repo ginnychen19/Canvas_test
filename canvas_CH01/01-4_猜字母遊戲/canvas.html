@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜字遊戲</title>
+    <link rel="stylesheet" href="./canvas.css">
+    <script src="../modernizr-1.6.min.js"></script>
+</head>
+
+<body>
+
+    <div class="canvas">
+        <canvas id="canvasOne" width="500" height="300">
+            <!-- 之所以要放這段是因為如果沒有支援canvas的瀏覽器，這段文字就會顯示出來。 -->
+            your browser does not support html5 canvas
+        </canvas>
+        <!-- 捕捉畫面 -->
+        <form>
+            <input type="button" id = "createImageData" value="Export Canvas Image">
+        </form>
+    </div>
+
+    <script type="text/javascript" src="./canvasapp.js"></script>
+    
+</body>
+
+</html>

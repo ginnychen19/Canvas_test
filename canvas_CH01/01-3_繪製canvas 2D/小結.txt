@@ -1,0 +1,50 @@
+【繪製canvas 2D的步驟】
+因為算法的特性，製作canvas時，使用原生js，會比使用JQ更好。
+canvas語法vs提示叉件 canvas-snippets
+
+
+01.檢查瀏覽器是否支援
+02.取得該Canvas元件。
+var theCanvas = document.getElementById("canvasOne");
+03.設定繪製方式為2d
+var context = theCanvas.getContext("2d");
+
+這時2d就可以有很多方法能用！
+速查表：https://www.webhek.com/post/html5-canvas-cheat-sheet/
+
+
+Style  => 填色
+fill   => 填內部
+stroke => 填邊緣
+Rect   =>
+
+【文字】
+寫文字
+context.font = '40px Arial';
+context.fillStyle = 'red';
+context.fillText('Hello World!', x, y);
+
+寫镂空文字
+context.font = '40pt Arial';
+context.strokeStyle = 'red';
+context.strokeText('Hello World!', x, y);
+
+文字基线
+context.textBaseline = 'top|hanging|middle|alphabetic|ideographic|bottom';
+
+【圖形】
+绘制方形
+context.rect(x, y, width, height);
+context.fill();   //填充
+context.stroke(); //勾勒
+
+填充顏色
+context.fillStyle = 'red';
+勾勒
+context.strokeStyle = 'red';
+
+填充区域
+context.fillRect(x, y, width, height);
+绘制方形的边框
+context.strokeRect(x, y, width, height);
+

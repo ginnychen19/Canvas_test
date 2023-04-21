@@ -1,0 +1,75 @@
+【canvas】
+一、狀態
+二、path路徑
+三、狀態的儲存與還原
+
+===========================================================================================
+【canvas 畫線】
+一、畫直
+beginPath()
+moveTo(x,y);
+closePath();
+
+01.末端線帽 => lineCap = butt(平) | round(圓) | square(方)
+02.接合角   => lineJoin = miter(尖角) | round(圆角) | bevel(斜角)
+03.虛線     => LineDash
+虛線的參數會重複數值產生 [實線、間隔、實線、間隔、實線 ......] 效果
+ctx.setLineDash([20]); // 實線、間隔都是 20 -> [20,20,20,20, ...]
+ctx.setLineDash([1,10]);  // 實線 1、間隔 10 ->  [1,10,1,10, ...]
+
+二、畫弧
+01.弧線 arc
+Path()中畫弧線 => .arcTo(x1,y1,x2,y2,r) 
+https://www.runoob.com/tags/canvas-arcto.html
+
+02.曲線 curve
+三、畫貝茲曲線
+四、畫剪裁遮色片的區塊
+
+===========================================================================================
+【canvas 組合圖案】
+一、合成操作
+    source  這個是設定後會和上一個圖形作用
+destination 這個是設定在要保留的圖案上，和下一個圖案作用
+
+//就記這張圖吧
+context.globalCompositeOperation = 
+source-atop      | 新的在上，遮色片的概念，新圖案保留交集，就圖案也會留下
+source-in        | 遮色片的概念，保留交集，舊圖不留
+source-out       | 遮色片的概念，保留多出的，舊圖不留
+source-over      | 預設，全部保留
+destination-atop | 
+destination-in   | 跟下一個圖案交互(這圖案在下面)，保留有下個交集的部分，會影響上面的
+destination-out  | 只顯示 destination 圖層中不重疊的部分，其他部分都被遮擋
+destination-over |
+lighter          | 顏色相加
+xor              | 形狀在重疊的地方變得透明，並且在其他地方正常繪製
+copy             |
+圖片參考：https://www.webhek.com/apps/html5-canvas-cheat-sheet/html5-canvas-composite-operations.png
+
+.globalAlpha = .5; //數值是0.0~1.0，要再畫出圖形前設定好
+
+二、形狀調整
+    移動：context.translate(x, y);
+放大縮小：context.scale(x, y);
+    旋轉：context.rotate(radians);
+
+    setTransform(1, 0.5, 0, 1, 0, 0);
+        //a(m11) 水平縮放。值1不縮放。
+        //b(m12) 垂直傾斜。
+        //c(m21) 橫向傾斜。
+        //d(m22) 垂直縮放。值1不縮放。
+        //e(dx) 水平平移（移動）。
+        //f(dy) 垂直平移（移動）。
+
+角度轉換：
+----------------------------------------------------------
+中心點調整
+
+===========================================================================================
+【canvas 填充】
+一、漸層填充
+二、圖案填充
+
+===========================================================================================
+【canvas 陰影繪製】

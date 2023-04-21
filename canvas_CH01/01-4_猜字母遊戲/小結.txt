@@ -1,0 +1,64 @@
+【猜字母遊戲執行邏輯】
+
+01.當網頁的載入事件觸發時，會執行 eventWindowloaded 函式。
+    eventWindowloaded 函式呼叫 canvasApp 函式。
+
+02.canvasApp 函式定義了一些變數
+    包括猜測次數 (guesses)
+    遊戲訊息 (message)
+    可猜字母列表 (letters)
+    要猜的字母 (lettertoguess)
+    高或低 (higherOrlower)
+    已經猜過的字母列表 (lettersguess)
+    遊戲是否結束 (gameover)
+
+03.canvasApp 函式呼叫 initGame 函式，設定一些初始值，並且繪製遊戲畫面。
+
+04.initGame 函式設定一個鍵盤事件監聽器，當使用者按下按鍵時，會觸發 eventKeyPressed 函式。
+
+05.eventKeyPressed 函式
+    判斷使用者按下的鍵是否為一個字母，如果不是字母，則顯示錯誤訊息，
+    如果是字母，則增加猜測次數、將猜過的字母加入列表中，
+    然後判斷這個字母是否為要猜的字母，
+    如果是，遊戲結束，如果不是，則提示使用者繼續往高或低的方向猜。
+
+06.eventKeyPressed 函式呼叫 drawScreen 函式，重新繪製遊戲畫面。
+
+07.drawScreen 函式繪製遊戲畫面
+
+08.如果遊戲結束，則在遊戲畫面上顯示一個成功的訊息。
+
+
+
+【canvas截圖要點】
+
+createImageDataPressed
+01.利用window.open開啟新視窗。
+02.在第一個參數放「開啟內容」，將theCanvas使用.toDataURL方法，轉成base64編碼。
+
+！！但此步驟會有跨域請求問題，ˇ導致圖片跑不出來！！
+錯誤訊息：not allowed to navigate top frame to data URL: 
+
+所以改成此開啟方式
+// 將Canvas轉換為DataURL
+var imageData = theCanvas.toDataURL("image/png");
+// 創建包含圖像的HTML字符串
+var html = '<html><body><img src="' + imageData + '"/></body></html>';
+// 使用window.open打開HTML
+var win = window.open('', 'canvasImage');
+win.document.write(html);
+
+
+============================================================================================
+window.open config 常用參數表
+--------------------------------------------------------------------------------------------
+參數	     參數值與說明
+--------------------------------------------------------------------------------------------
+toolbar	    指定工具列是否顯示，預設是顯示，如果要設為不顯示，寫法是 toolbar=no。
+scrollbars	指定 scroll bars 是否顯示，要顯示寫法是 scrollbars=yes，不顯示寫法是 scrollbars=no。
+resizable	訪客是否可以自己調整視窗大小，預設是可以，如果要設為不能調整，寫法是 resizable=no。
+location	是否顯示網址列，預設是顯示，如果不要顯示，寫法是 location=no。
+menubar	    是否顯示目錄欄位，預設是會顯示，如果不要顯示，寫法是 menubar=no。
+status	    是否顯示狀態列，預設是顯示，如果不要顯示，寫法是 status=no。
+left	    距離左邊的距離，單位是 pixels。
+top	        距離上面的距離，單位是 pixels。
