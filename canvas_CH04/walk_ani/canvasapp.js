@@ -29,7 +29,7 @@ function canvasApp() {
     myGirl_walk.src = "../img/Walk_ani.png";
     var animationframe = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     var frameIndex = 0;
-
+    
     function picLoaded() {
         starUP();
     }
