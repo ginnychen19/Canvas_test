@@ -1,3 +1,7 @@
 【canvas 影像處理】
-
+01.
+02.
+03.圖片的放大縮小控制 (上傳大頭貼)
+04.像素的處理 canvas pixel Manipulation API
+05.跨canvas 複製圖像
 

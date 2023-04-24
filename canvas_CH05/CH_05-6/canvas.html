@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>球之間的碰撞反彈練習</title>
+    <link rel="stylesheet" href="./canvas.css">
+    <script src="../modernizr-1.6.min.js"></script>
+</head>
+
+<body>
+
+    <div class="canvas">
+        <h1>球之間的碰撞反彈練習</h1>
+        <canvas id="canvasOne" width="600" height="600">
+            your browser does not support html5 canvas
+        </canvas>
+        <!-- <img src = "../img/Walk_(1).png"> -->
+        <form>
+            canvas的寬：<input type="range" id="canvasWidth"
+            min="0"
+            max="1000"
+            step="1"
+            value="600"/>
+            <br>    
+            canvas的高：<input type="range" id="canvasHeight"
+            min="0"
+            max="1000"
+            step="1"
+            value="600"/>  
+            <br>    
+        </form>
+    </div>
+
+    <script type="text/javascript" src="./canvasapp.js"></script>
+    
+</body>
+
+</html>

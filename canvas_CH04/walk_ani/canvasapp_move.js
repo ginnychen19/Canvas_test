@@ -64,6 +64,7 @@ function canvasApp() {
         }
 
         //為何我的迴圈只會檢查一次OAO
+        // console.log(nowXpoision);
         while (nowXpoision == (theCanvas.width)) {
             nowXpoision = -(myGirl_walk.width / 10);
         }
@@ -74,7 +75,7 @@ function canvasApp() {
         return (nowXpoision, nowYpoision);
     }
     function starUP() {
-        setInterval(drawScreen, 10);
+        setInterval(drawScreen, 100);
     }
 
 }
