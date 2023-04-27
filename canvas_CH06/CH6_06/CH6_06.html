@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>CH6EX4: Basic HTML5 Video With Resize Range Control </title>
+	<script src="../modernizr-1.6.min.js"></script>
+</head>
+
+<body>
+	<div>
+		<video loop controls id="theVideo" width="320" height="240">
+			<source src="../myVideo.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+			<source src="../myVideo.webm" type='video/webm; codecs="vp8, vorbis"'>
+			<source src="../myVideo.ogg" type='video/ogg; codecs="theora, vorbis"'>
+		</video>
+		<form>
+			Video Size : <input type="range" id="videoSize" min="80" max="1280" step="1" value="320" />
+		</form>
+		<br>
+		<div id="loadingStatus">0%</div>
+	</div>
+
+	<canvas id="canvasOne" width="600" height="600" style="border: 1px solid rebeccapurple;">
+		Your browser does not support the HTML 5 Canvas.
+	</canvas>
+	<script type="text/javascript" src="./canvasapp.js"></script>
+</body>
+
+</html>

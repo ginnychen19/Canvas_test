@@ -42,8 +42,8 @@ function canvasApp() {
 
     function drawScreen() {
         //讓目前位置進行累加
-        // nowXpoision = nowXpoision + dx;
-        // nowYpoision = nowYpoision + dy;
+        nowXpoision = nowXpoision + dx;
+        nowYpoision = nowYpoision + dy;
 
         context.fillStyle = '#50C878'; //畫背景
         context.fillRect(0, 0, theCanvas.width, theCanvas.height); //(600 * 600 的土地)
@@ -64,18 +64,21 @@ function canvasApp() {
         }
 
         //為何我的迴圈只會檢查一次OAO
-        // console.log(nowXpoision);
-        while (nowXpoision == (theCanvas.width)) {
+        //喔!我知道為什麼了，因為我的計算會出現小數點，所以第一次之後就不會有剛好==600的情況。
+        console.log(nowXpoision);
+        if (nowXpoision >= (theCanvas.width)) {
             nowXpoision = -(myGirl_walk.width / 10);
         }
-        while (nowYpoision == (theCanvas.height)) {
+        if (nowYpoision >= (theCanvas.height)) {
             nowYpoision = -(myGirl_walk.height);
         }
 
         return (nowXpoision, nowYpoision);
     }
+
+
     function starUP() {
-        setInterval(drawScreen, 100);
+        setInterval(drawScreen, 50);
     }
 
 }
