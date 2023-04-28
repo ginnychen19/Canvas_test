@@ -15,8 +15,8 @@ window.addEventListener('load', function () {
             this.player = new Player(this);
             this.input = new InputHandler();
         }
-        update() {
-            this.player.update(this.input.keys);
+        update(deltaTime) {
+            this.player.update(this.input.keys,deltaTime);
         }
         draw(context) {
             this.player.draw(context);
@@ -26,14 +26,20 @@ window.addEventListener('load', function () {
 
     const game = new Game(canvas.width, canvas.height);
     //console.log(game);
+    let lastime = 0;
 
-    function animate() {
+    function animate(timeStamp) {
+        const deltaTime = timeStamp - lastime;
+        // console.log(deltaTime);
+        //這個console.log可以發現requestAnimationFram的時間是算的很細的。
+        //因此我們把時間加入到.update()
+        lastime = timeStamp;
         // game.draw(ctx);
         //要加clearRect，要不然會有無限殘影。
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        game.update();
+        game.update(deltaTime);
         game.draw(ctx);
         requestAnimationFrame(animate);
     }
-    animate();
+    animate(0);
 });
