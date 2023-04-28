@@ -70,6 +70,11 @@ table{
     background-color: var(--color01);
 }
 
-#myplayer{
+#myplayer,
+#layer5,
+#layer4,
+#layer3,
+#layer2,
+#layer1{
     display: none;
 }

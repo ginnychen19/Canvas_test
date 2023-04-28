@@ -29,7 +29,7 @@ export class Sitting extends State {
         //this.player.setState(states.RUNNING); 
         //這行主要是去調用player.js中的setState去切換狀態
         if (input.includes('ArrowRight') || input.includes('ArrowLeft')){
-            this.player.setState(states.RUNNING);
+            this.player.setState(states.RUNNING, 1);
         }
     }
 }
@@ -47,9 +47,9 @@ export class Running extends State {
         //這邊是設定說，當玩家按了什麼按鈕，要把狀態改成 const states的哪一碼
         //這邊的數字會對應到frameY；
         if (input.includes('ArrowDown')){
-            this.player.setState(states.SITTING);
+            this.player.setState(states.SITTING, 0);
         }else if(input.includes("ArrowUp")){
-            this.player.setState(states.JUMPING);
+            this.player.setState(states.JUMPING, 1);
         }
     }
 }
@@ -66,7 +66,7 @@ export class Jumping extends State {
     }
     handleInput(input){
         if (this.player.vy > this.player.weight){
-            this.player.setState(states.FALLING);
+            this.player.setState(states.FALLING, 1);
         }
     }
 }
@@ -82,7 +82,7 @@ export class Falling extends State {
     }
     handleInput(input){
         if (this.player.onGround()){//等他回到地面再變跑的模式
-            this.player.setState(states.RUNNING);
+            this.player.setState(states.RUNNING, 1);
         }
     }
 }

@@ -7,18 +7,18 @@ export class Player {
         this.width = 100;
         this.height = 91.3;
         this.x = 0;
-        this.y = this.game.height - this.height;
+        this.y = this.game.height - this.height - this.game.groundMargin;
         this.vy = 0; //控制角色掉落速度的變量
-        this.weight = 1;
+        this.weight = 1.5; //影響引力
         this.image = document.getElementById("myplayer");
         this.frameX = 0; //這邊是用來畫精靈圖。
         this.frameY = 0; //決定動作狀態。  
         this.maxframe; //決定動作狀態。 
-        this.fps = 20; //這邊影響動畫看起來的速度。
+        this.fps = 15; //這邊影響動畫看起來的速度。
         this.frameInterval = 1000 / this.fps;
         this.frameTimer = 0; //以上三個用來計數動畫
         this.speed = 0;
-        this.maxSpeed = 10;
+        this.maxSpeed = 10;//控制移動速度
         this.states = [//這邊會放playerStates.js的各種狀態。
             new Sitting(this),
             new Running(this),
@@ -35,7 +35,7 @@ export class Player {
         if (input.includes('ArrowRight')) this.speed = this.maxSpeed;
         else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
         else this.speed = 0;
-        if (this.x < 0) this.x = 0;
+        if (this.x < 0) this.x = 0;//不能超過牆壁
         if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
 
         // vertical movement 上下移動
@@ -68,11 +68,12 @@ export class Player {
     }
 
     onGround() {
-        return this.y >= this.game.height - this.height;
+        return this.y >= this.game.height - this.height - this.game.groundMargin;
     }
-    setState(state){
+    setState(state , speed){
         //把從playerStates.js接收到的狀態內容換到這裡
         this.currentState = this.states[state];//這是啥意思?
+        this.game.speed = speed; //要加speed是因為這樣我們才可以在playerStates.js中，設定當我們是哪個動作時，畫面移動的速度要是0或正常。
         this.currentState.enter();
     }
 }
