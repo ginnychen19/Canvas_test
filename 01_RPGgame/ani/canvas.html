@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動態製作</title>
+    <link rel="stylesheet" href="./canvas.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="../modernizr-1.6.min.js"></script>
+</head>
+
+<body>
+
+    <div class="canvas">
+        <section class="One">
+            <h3>全部動畫：</h3>
+            <canvas id="canvasOne" width="600" height="180">
+                your browser does not support html5 canvas
+            </canvas>
+        </section>
+        
+        <section class="Two">
+            <table>
+                <thead>
+                    <tr><td>操作方式</td></tr> 
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>移動：</td>
+                        <td>上下左右鍵</td>
+                    </tr>
+                    <tr>
+                        <td>跳躍：</td>
+                        <td>空白</td>
+                    </tr>
+                    <tr>
+                        <td>目標任務：</td>
+                        <td>採完該採的樹葉</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <canvas id="canvasTwo" width="400" height="400">
+                your browser does not support html5 canvas
+            </canvas>
+        </section>
+        
+        <!-- <img src = "img/Walk_(1).png"> -->
+    </div>
+
+    <script type="text/javascript" src="./canvasapp.js"></script>
+    
+</body>
+
+</html>
