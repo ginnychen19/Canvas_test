@@ -8,6 +8,7 @@ export class Player {
         this.height = 91.3;
         this.x = 0;
         this.y = this.game.height - this.height - this.game.groundMargin;
+        this.scale = 1;//圖片要乘多少
         this.vy = 0; //控制角色掉落速度的變量
         this.weight = 1.5; //影響引力
         this.image = document.getElementById("myplayer");
@@ -36,7 +37,7 @@ export class Player {
         else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
         else this.speed = 0;
         if (this.x < 0) this.x = 0;//不能超過牆壁
-        if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
+        if (this.x > this.game.width - (this.width*this.scale)) this.x = this.game.width - (this.width*this.scale);
 
         // vertical movement 上下移動
         this.y += this.vy;
@@ -62,8 +63,8 @@ export class Player {
             this.frameX * this.width, this.frameY * this.height, 
             this.width, this.height,
             
-            this.x, this.y,
-            this.width,this.height
+            this.x , this.y + (this.height * this.scale),//因為有除，所以要
+            this.width * this.scale,this.height * this.scale
             );
     }
 

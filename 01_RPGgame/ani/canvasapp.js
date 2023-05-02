@@ -179,11 +179,13 @@ function canvasApp() {
         var playerX = 0;
         var playerY = 0;
 
+        
         context2.fillStyle = '#50C878'; //畫背景
         context2.fillRect(0, 0, canvasTwo.width, canvasTwo.height); //(600 * 600 的土地)
-
+        
         render("myGirl_Idle", playerX, playerY);
         draw_leafGood();
+        context2.drawImage(theCanvas, 0,0,200,200, 200,200,100,100);
        
         //動畫計數器們
         frameIndex_5++;
@@ -283,6 +285,7 @@ function canvasApp() {
         //
         setInterval(drawCanvasOne, 100);
         setInterval(drawCanvastwo, 100);
+        
     }
 
 }

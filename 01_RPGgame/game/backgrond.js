@@ -7,7 +7,7 @@ class Layer {
         this.speedModifier = speedModifier; //調整移動速率
         this.image = image;
         this.x = 0;
-        this.y = 100;
+        this.y = 0;
     }
     update() {
         if (this.x < -this.width) this.x = 0;
@@ -54,3 +54,4 @@ export class Background {
         })
     }
 }
+

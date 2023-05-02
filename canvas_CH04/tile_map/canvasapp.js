@@ -121,7 +121,7 @@ function canvasApp() {
     }
     function starUP() {
         setInterval(drawScreen, 100);
-        drawBlocked();      
+        // drawBlocked();      
         drawBg();
     }
 }

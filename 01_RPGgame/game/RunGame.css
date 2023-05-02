@@ -24,7 +24,7 @@ h1,h2,h3,h4,h5,h6,p{
     margin: 0;
 }
 body {
-    background-color: var(--BTN_Green);
+    background-color: var(--BTN_Blue);
     padding: 150px;
     display: flex;
     justify-content: center;
@@ -75,6 +75,9 @@ table{
 #layer4,
 #layer3,
 #layer2,
-#layer1{
+#layer1,
+#enemy_fly,
+#enemy_plant,
+#enemy_spider_gig{
     display: none;
 }

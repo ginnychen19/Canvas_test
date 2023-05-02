@@ -21,7 +21,7 @@ export class Sitting extends State {
     }
     enter(){
         this.player.frameX= 0; //為了在每次進入時初始化
-        this.player.frameY = 5;
+        this.player.frameY = 0;
         this.player.maxframe = 4;//因為從0計，所以要記得-1
     }
     handleInput(input){
@@ -30,6 +30,8 @@ export class Sitting extends State {
         //這行主要是去調用player.js中的setState去切換狀態
         if (input.includes('ArrowRight') || input.includes('ArrowLeft')){
             this.player.setState(states.RUNNING, 1);
+        }else if(input.includes("ArrowUp")){
+            this.player.setState(states.JUMPING, 1);
         }
     }
 }
@@ -40,8 +42,8 @@ export class Running extends State {
     }
     enter(){
         this.player.frameX= 0;
-        this.player.maxframe = 8;
         this.player.frameY = 3;
+        this.player.maxframe = 8;
     }
     handleInput(input){
         //這邊是設定說，當玩家按了什麼按鈕，要把狀態改成 const states的哪一碼
