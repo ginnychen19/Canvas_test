@@ -7,8 +7,8 @@ window.addEventListener('load', function () {
     const canvas = this.document.getElementById("canvas1")
     const ctx = canvas.getContext('2d');
     
-    canvas.width = 600;
-    canvas.height = 500;
+    canvas.width = 1080;
+    canvas.height = 720;
 
     class Game {
         constructor(width, height) {
@@ -22,7 +22,7 @@ window.addEventListener('load', function () {
             this.enemies = [];
             this.enemyTimer = 0;
             this.enemyInterval = 1000;
-
+            this.debug = true;
         }
         update(deltaTime) {
             this.background.update();

@@ -78,6 +78,7 @@ table{
 #layer1,
 #enemy_fly,
 #enemy_plant,
-#enemy_spider_gig{
-    display: none;
+#enemy_spider_big,
+#lives{
+display: none;
 }
