@@ -83,6 +83,7 @@ function canvasApp() {
 		context.fillText  ("Controls: " + audioElement.controls,  250 ,60);
 		context.fillText  ("Volume: " + audioElement.volume,  20 ,80);
 		context.fillText  ("Paused: " + audioElement.paused,  250 ,80);
+		/*.paused 是 <audio> 元素的原生屬性之一，用於檢查音訊是否正在播放。如果音訊已暫停，則屬性的值為 true，否則屬性的值為 false。 */
 		context.fillText  ("Ended: " + audioElement.ended,  20 ,100);
 		context.fillText  ("Can Play OGG: " + audioElement.canPlayType("audio/ogg"),  250 ,100);
 		context.fillText  ("Can Play WAV: " + audioElement.canPlayType("audio/wav"),  20 ,120);
@@ -92,21 +93,17 @@ function canvasApp() {
 		
 		//Draw Controls
 		
-		//play or pause
-		
+		//play or pause	
 		if (audioElement.paused) {
-			context.drawImage(buttonSheet, 0,0,bW,bH,playX,playY,bW,bH);//show play
-			
+			context.drawImage(buttonSheet, 0,0,bW,bH,playX,playY,bW,bH);//show play	
 		} else {
 			context.drawImage(buttonSheet, 0,32,bW,bH,playX,playY,bW,bH); //show pause
 			
 		} 
 			
 		//loop
-		
 		if (audioElement.loop) {
-			context.drawImage(buttonSheet, 114,32,bW,bH,loopX,loopY,bW,bH);//show loop
-			
+			context.drawImage(buttonSheet, 114,32,bW,bH,loopX,loopY,bW,bH);//show loop			
 		} else {
 			context.drawImage(buttonSheet, 82,32,bW,bH,loopX,loopY,bW,bH); //show no loop
 		} 
@@ -154,14 +151,10 @@ function canvasApp() {
 	
 	
 	function eventMouseDown(event) {
-		
 		//Hit Volume Slider
 		if ( (mouseY >= volumeSliderY) && (mouseY <=volumeSliderY+sliderH) && (mouseX >= volumeSliderX) && (mouseX <= volumeSliderX+sliderW) ) {
-			volumeSliderDrag = true;
-			
+			volumeSliderDrag = true;			
 		}
-		
-	
 	}
 	
 	function eventMouseMove(event) {
@@ -172,15 +165,18 @@ function canvasApp() {
     		mouseX = event.offsetX;
 			mouseY = event.offsetY;
   		}
-		
-		
 	}
 	
-	function eventMouseUp(event) {
-		
-				
+	function eventMouseUp(event) {	
 		//Hit Play
 		if ( (mouseY >= playY) && (mouseY <= playY+bH) && (mouseX >= playX) && (mouseX <= playX+bW) ) {
+			/*
+			滑鼠的 Y 座標 >= 播放按鈕的 Y 座標，
+			並且 <= 播放按鈕的 Y 座標 + 按鈕的高度 (bH)；
+			同時，滑鼠的 X 座標 >= 等於播放按鈕的 X 座標，
+			並且 <= 播放按鈕的 X 座標 + 按鈕的寬度 (bW)。
+			條件成立表示滑鼠點擊了播放按鈕的範圍。
+			*/
 			if (audioElement.paused) {
 				audioElement.play();
 				
@@ -190,24 +186,18 @@ function canvasApp() {
 			}
 		
 		}
-		
 		//Hit loop
 		if ( (mouseY >=loopY) && (mouseY <= loopY+bH) && (mouseX >= loopX) && (mouseX <= loopX+bW) ) {
 			if (audioElement.loop) {
 				audioElement.loop=false;
-				
 			} else {
 				audioElement.loop = true;
-			
 			}
-		
+
 		}
-		
 		if (volumeSliderDrag) {
 			volumeSliderDrag = false;
 		}
-		
-		
 	}
 	
 	

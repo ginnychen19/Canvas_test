@@ -1,5 +1,6 @@
-import { Sitting, Running, Jumping, Falling ,Death} from './playerStates.js';
+import { Sitting, Running, Jumping, Falling, Death } from './playerStates.js';
 import { FlyingEnemy, GroundEnemy, ClimbingEnemy } from './enemies.js';
+import { playerSound, EnemySound } from './music.js';
 
 //這邊的this = Player這個class ，也就是操控角色。
 export class Player {
@@ -30,23 +31,37 @@ export class Player {
         ];
         this.currentState = this.states[0];
         this.currentState.enter();
+
+        this.playerSound = new playerSound(this.game);//玩家動作音樂
+        this.EnemySound = new EnemySound(this.game);//敵人碰撞音樂
     }
     update(input, deltaTime) {
         this.checkCollision();
         this.currentState.handleInput(input);//在每次更新前先檢查狀態
         // horizontal movement 左右移動
         this.x += this.speed;
-        if (input.includes('ArrowRight')) this.speed = this.maxSpeed;
-        else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
-        else this.speed = 0;
+        if (input.includes('ArrowRight')) {
+            this.speed = this.maxSpeed;
+            this.playerSound.Playmusic(1,input);//聽起來不會重複撥放，不過要判斷死亡時停止撥放
+        }
+        else if (input.includes('ArrowLeft')){
+            this.speed = -this.maxSpeed;
+            this.playerSound.Playmusic(1,input);
+        }
+        else {this.speed = 0;}
         if (this.x < 0) this.x = 0;//不能超過牆壁
         if (this.x > this.game.width - (this.width * this.scale)) this.x = this.game.width - (this.width * this.scale);
 
         // vertical movement 上下移動
-        if (input.includes('ArrowUp')) this.speed = this.maxSpeed;
+        if (input.includes('ArrowUp')) {
+            this.speed = this.maxSpeed;
+            this.playerSound.Playmusic(0,input);
+        }
         this.y += this.vy;
-        if (!this.onGround()) this.vy += this.weight;
-        else this.vy = 0;
+
+        if (!this.onGround()) {
+            this.vy += this.weight;
+        } else { this.vy = 0; }
 
         //畫動態圖
         if (this.frameTimer > this.frameInterval) {
@@ -103,16 +118,17 @@ export class Player {
                 enemy.markedForDeletion = true;
                 if (enemy instanceof FlyingEnemy) {
                     this.game.score++;
+                    this.EnemySound.Playmusic(0);
                 } else if (enemy instanceof GroundEnemy) {
                     this.game.lives--;
-                    if( this.game.lives <= 0 ){
-                        this.setState(4,0);
+                    if (this.game.lives <= 0) {
+                        this.setState(4, 0);
                         setTimeout(() => {
                             this.game.gameOver = true;
                         }, 700);//因為死亡動畫撥一次完大概是700毫秒
                     }
-                } 
-                               
+                }
+
             } else {
                 //no collosion
             }

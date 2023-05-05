@@ -3,6 +3,7 @@ import { InputHandler } from './input.js';
 import { Background } from './backgrond.js';
 import { FlyingEnemy, GroundEnemy, ClimbingEnemy } from './enemies.js';
 import { UI } from './UI.js';
+import { BgMusic,UiSound,playerSound,EnemySound } from './music.js';
 
 window.addEventListener('load', function () {
     const canvas = this.document.getElementById("canvas1");
@@ -32,6 +33,7 @@ window.addEventListener('load', function () {
             this.formattedTime = "00:00";
             this.gameOver = false;
             this.gamePause = false;
+            this.gameBGmusic = false;
             this.lives = 5;
             this.player.currentState = this.player.states[0];
             this.player.currentState.enter();
@@ -53,7 +55,7 @@ window.addEventListener('load', function () {
             //遊戲背景
             this.background.update();
             this.player.update(this.input.keys, deltaTime);
-            //handleEnemies
+            //生成敵人
             if (this.enemyTimer > this.enemyInterval) {
                 this.addEnemy();
                 this.enemyTimer = 0;

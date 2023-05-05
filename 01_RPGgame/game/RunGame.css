@@ -18,20 +18,51 @@
     --pSTitle: 28px;
     --pContent: 18px;
     --pSContent: 14px;
+
+    --gameUIwidth: 900;
+    --gameUIheight: 500;
 }
 
-h1,h2,h3,h4,h5,h6,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     margin: 0;
 }
+
 body {
     background-color: var(--BTN_Blue);
     padding: 150px;
+    width:100vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 
 }
+
+.gameUI {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #e3344b;
+    border: 1px solid red;
+    font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
+}
+
+#Splash {
+    width: var(--gameUIwidth);
+    height: var(--gameUIheight);
+    /* background-color: #525152; */
+    /* width: calc(var(--gameUIwidth)/2);
+    height: calc(var(--gameUIheight)/2); */
+}
+
 
 .canvas {
     display: flex;
@@ -51,7 +82,7 @@ body {
     font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
 }
 
-.Two{
+.Two {
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -62,13 +93,18 @@ body {
     letter-spacing: 2px;
     font-family: "Helvetica", "Arial", "LiHei Pro", "黑體-繁", "微軟正黑體", sans-serif;
 }
-table{
+
+table {
     min-width: 250px;
 }
+
 #canvas1 {
     border: 2px solid var(--color06);
     background-color: var(--color01);
 }
+
+
+
 
 #myplayer,
 #layer5,
@@ -79,6 +115,7 @@ table{
 #enemy_fly,
 #enemy_plant,
 #enemy_spider_big,
-#lives{
-display: none;
+#lives,
+#Settings {
+    display: none;
 }
