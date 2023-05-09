@@ -1,19 +1,8 @@
-/* 控制器們 */
-var drawColor = document.getElementById("drawColor");
-var cakeColor = document.getElementById("cakeColor");
-//奶油大小和橡皮擦的事件再replaceSvgImages()完成後做。
+import { drawCanvas } from './draw.js';
+// 我不能加上 $('document').on('ready', function () { })
 
-/*換奶油顏色*/
-drawColor.addEventListener("change", (e) => {
-    console.log(drawColor.value);
-})
-/*換蛋糕顏色*/
-cakeColor.addEventListener("change", (e) => {
-    console.log(cakeColor.value);
-    $(".cakePIC").attr("src", `./Source/SVG/game/${cakeColor.value}.svg`);
-})
-
-/* 把所有img引入的svg在網頁上轉換成svg */
+/* 01. 我把功能都放到svg轉好再做*/
+/* 02. 把所有img引入的svg在網頁上轉換成svg */
 function replaceSvgImages() {
     // 创建一个 Promise 对象并返回它
     return new Promise(function (resolve, reject) {
@@ -52,54 +41,49 @@ function replaceSvgImages() {
         });
     });
 }
-// 调用 replaceSvgImages() 方法并在所有 SVG 替换完成后执行回调函数
+/* 03. 调用 replaceSvgImages() 方法并在所有 SVG 替换完成后执行回调函数*/
 replaceSvgImages().then(function () {
+    const drawCanva = new drawCanvas();//我一樣要再轉換完過後才可以做這件事。
     console.log('All SVG images have been replaced!');
+    // console.log(drawCanva);
 
-    //奶油按鈕事件控制
-    let cream = $('.cream');
-    cream.eq(0).find("path").addClass("checked"); //給第一個加上選中
-    cream.on("click", function (e) {
-        $('.checked').not($(this)).removeClass('checked');
-        $(this).find("path").toggleClass("checked");
-    });
+    drawCanva.CreamColorChange();//換奶油顏色
+    drawCanva.CreamSizeChange();//換奶油大小
+    drawCanva.draw();//換奶油大小
+    drawCanva.useEraser();//橡皮擦功能切換
+    drawCanva.CakeColorChange();//換蛋糕顏色
 
-    //橡皮擦按鈕事件控制
-    let Eraser = $('.eraser');
-    Eraser.on("click", function (e) {
-        $(this).find("path").toggleClass("checked");
-    });
+    saveMyCake();//儲存畫布
+})
 
-    /* 處存畫布按鈕 */
+/* 儲存畫布按鈕 */
+var saveMyCake = () => {
     var element = document.getElementById('imageDIV');
     $("#download").on('click', function () {
-        html2canvas(element, {
-            scrollX: 0,
-            scrollY: 0,
-            willReadFrequently: true,
-            onrendered: function (canvas) {
-                // 下載圖像
-                Canvas2Image.saveAsPNG(canvas);
-
-                // 插入圖像到 output div 中
-                var output = document.getElementById('output');
-                output.innerHTML = '';
-                var img = document.createElement('img');
-                img.src = canvas.toDataURL('image/png');
-                output.appendChild(img);
-
-                // 打開新的瀏覽器窗口顯示圖像
-                var imgData = canvas.toDataURL('image/png');
-                var newWindow = window.open('about:blank', '_blank');
-                newWindow.document.write('<img src="' + imgData + '" alt="image"/>');
+        var options = {
+            // 指定要裁剪的範圍
+            width: 1440,
+            height: 1440,//780大概是底
+            style: {//笑死結果最後硬幹出來，可是如果要讓移動端也能用就要另外想辦法了
+                "transform-origin": "680px 200px",
+                scale: "2.3",
             }
-        });
+        };
+        domtoimage.toPng(element, options)
+            .then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = 'image.png';
+                link.href = dataUrl;
+                link.click();
+
+                var newWindow = window.open();
+                newWindow.document.body.innerHTML = '<img src="' + dataUrl + '">';
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
     });
-})
-        // var imgageData = getCanvas.toDataURL("image/png");
-        // // Now browser starts downloading it instead of just showing it
-        // var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
-        // $("#download").attr("download", "image.png").attr("href", newData);
+}
 
 
 

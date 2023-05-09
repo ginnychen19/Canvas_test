@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Canvas Draw homework</title>
+    <style>
+        h3,
+        select,
+        button {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        canvas {
+            position: relative;
+            display: block;
+            z-index: 2;
+        }
+
+        img {
+            position: absolute;
+            top: 60px;
+            left: 99px;
+            width: 200px;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Canvas Draw</h3>
+    <select name="" id="" onchange="hi(this)">
+        <option value="">請選要畫哪一個哦</option>
+        <option value="value1">流星錘</option>
+        <option value="value2">方塊</option>
+        <option value="value3">笑臉</option>
+    </select>
+
+    <button type="reset" onclick="clearCanvas();">重設</button>
+    <canvas id="cvs" width="800" height="600" style="border: 1px solid black"></canvas>
+    <img src="Source/SVG/cream.svg">
+    <script>
+        var ctx;
+        window.onload = function () {
+            ctx = document.getElementById("cvs").getContext("2d");
+        };
+
+
+
+        function hi(sel) {
+            /*為何要移除呢*/
+            ctx.canvas.removeEventListener("mousedown", openCvs);
+            ctx.canvas.removeEventListener("mousedown", openCvs1);
+            ctx.canvas.removeEventListener("mousedown", openCvs2);
+
+            /*選到哪個就加哪一個事件聆聽*/
+            if (sel.value == "value1") {
+                ctx.canvas.addEventListener("mousedown", openCvs);
+                ctx.canvas.addEventListener("mouseup", closeCvs);
+            } else if (sel.value == "value2") {
+                ctx.canvas.addEventListener("mousedown", openCvs1);
+                ctx.canvas.addEventListener("mouseup", closeCvs1);
+            } else if (sel.value == "value3") {
+                ctx.canvas.addEventListener("mousedown", openCvs2);
+                ctx.canvas.addEventListener("mouseup", closeCvs2);
+            }
+        }
+        function clickCvs(e) {
+            var x = e.clientX - ctx.canvas.offsetLeft;
+            var y = e.clientY - ctx.canvas.offsetTop;
+            var size = Math.random() * 40 + 10;
+            drawStar(x, y, size);
+
+            console.log(
+                `e.clientX = ${e.clientX},
+                e.clientY= ${e.clientY},
+                ctx.canvas.offsetLeft = ${ctx.canvas.offsetLeft},
+                ctx.canvas.offsetTop = ${ctx.canvas.offsetTop},
+                `);
+        }
+        function clickCvs1(e) {
+            var x = e.clientX - ctx.canvas.offsetLeft;
+            var y = e.clientY - ctx.canvas.offsetTop;
+            var size = Math.random() * 40 + 10;
+            drawRect(x, y, size);
+        }
+        function clickCvs2(e) {
+            var x = e.clientX - ctx.canvas.offsetLeft - 75;
+            var y = e.clientY - ctx.canvas.offsetTop - 75;
+            drawSmile(x, y);
+        }
+
+        /*畫三種不同的圖案*/
+        function drawStar(x, y, size) {
+            ctx.save();
+            // ctx.translate(x, y);
+            // ctx.fillStyle = "#0072E3";
+            // ctx.fillRect(-size / 2, -size / 2, size, size);
+            // ctx.rotate(Math.PI / 4);
+            // ctx.fillRect(-size / 2, -size / 2, size, size);
+            // ctx.restore();
+            var scale = 1;
+            var canterX = 30;
+            var canterY = 30;
+
+            var points = "55.28 30.27 56.97 32.65 59.7 35.53 59.04 38.09 53.85 38.98 55.07 42.01 52.95 43.57 54.63 47.58 49.44 46.63 48.81 49.15 46.51 50.01 44.97 51.72 43.89 54.39 40.68 53.22 40.32 58.66 37.7 59.01 35.26 60 32.44 57.79 30.04 56.22 27.67 57.57 25.6 55.63 22.27 59.43 20.46 56.73 18.83 54.45 16.79 53.35 13.9 53.46 10.59 53.58 8.67 51.77 7.31 49.46 6.98 46.51 7.27 43.49 7.1 41.03 3.54 39.97 1.05 38.08 2.61 35.14 0 32.92 2.79 30.27 3.94 27.98 .85 25.1 1.18 22.5 4.23 20.83 6.5 19.24 4.35 15.36 7.47 14.38 6.96 10.8 10.58 10.7 12.47 9.21 12.94 5.71 16.6 6.85 19.13 6.73 19.71 1.74 22.95 3.65 25.13 2.27 27.54 1.52 30.04 0 32.57 1.22 34.72 3.64 37.64 1.77 40.48 1.44 42.92 2.52 43.95 6.07 44.44 9.6 48.96 7.6 49.61 10.61 53.42 10.56 50.65 15.77 54.92 15.84 55.59 18.3 56.68 20.53 54.53 23.67 59.83 24.99 60 27.64 55.28 30.27"
+            var coords = points.split(' ').reduce(function (acc, point, index, array) {
+                if (index % 2 === 0) {
+                    acc.push([
+                        /*把svg改成數組，後面再加上x、y就可以形成繪製關係 -的部分則是為了讓滑鼠看起來在中間*/
+                        (parseFloat(point) * scale + x) - canterX * scale,
+                        (parseFloat(array[index + 1]) * scale + y) - canterY * scale
+                    ]);
+                }
+                return acc;
+            }, []);
+            // 绘制路径
+            ctx.beginPath();
+            coords.forEach(function (coord, index) {
+                if (index === 0) {
+                    ctx.moveTo(coord[0], coord[1]);
+                } else {
+                    ctx.lineTo(coord[0], coord[1]);
+                }
+            });
+            ctx.closePath();
+            ctx.fillStyle = "red";
+            ctx.fill();
+
+            // console.log(coords);
+        }
+        function drawRect(x, y, size) {
+            ctx.save();
+            var gra = ctx.createLinearGradient(100, 400, 600, 100);
+            gra.addColorStop(0, "#C48888");
+            gra.addColorStop(0.3, "#fff");
+            gra.addColorStop(1, "#BE77FF");
+            ctx.fillStyle = gra;
+            ctx.translate(x, y);
+            ctx.fillRect(-size / 2, -size / 2, size, size);
+            ctx.restore();
+        }
+        function drawSmile(x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.beginPath();
+            ctx.arc(75, 75, 50, 0, Math.PI * 2, true);
+            ctx.moveTo(110, 75);
+            ctx.arc(75, 75, 35, 0, Math.PI, false);
+            ctx.moveTo(65, 65);
+            ctx.arc(60, 65, 5, 0, Math.PI * 2, true);
+            ctx.moveTo(95, 65);
+            ctx.arc(90, 65, 5, 0, Math.PI * 2, true);
+            ctx.strokeStyle = "#6DD0CD";
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function closeCvs() {
+            ctx.canvas.removeEventListener("mousemove", clickCvs);
+        }
+        function closeCvs1() {
+            ctx.canvas.removeEventListener("mousemove", clickCvs1);
+        }
+        function closeCvs2() {
+            ctx.canvas.removeEventListener("mousemove", clickCvs2);
+        }
+
+        function openCvs() {
+            ctx.canvas.addEventListener("mousemove", clickCvs);
+        }
+        function openCvs1() {
+            ctx.canvas.addEventListener("mousemove", clickCvs1);
+        }
+        function openCvs2() {
+            ctx.canvas.addEventListener("mousemove", clickCvs2);
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        }
+
+
+    </script>
+
+
+    <!-- <script>
+        //当然，我可以为您提供一些代码示例。以下是一个使用 Canvg 将 SVG 转换为 Canvas 并在 Canvas 上绘制路径的示例代码。请注意，这个示例代码仅用于演示目的，您需要根据自己的需求进行修改。
+        
+        var svg = document.querySelector('svg');// 获取 SVG 元素
+        var svgXml = new XMLSerializer().serializeToString(svg);// 获取 SVG 元素的 XML 字符串
+        var canvas = document.createElement('canvas');// 创建一个 Canvas 元素
+        document.body.appendChild(canvas);// 将 Canvas 元素添加到 DOM 中
+        canvg(canvas, svgXml);// 使用 Canvg 将 SVG 转换为 Canvas
+        
+        var ctx = canvas.getContext('2d');// 获取 Canvas 的上下文对象
+        var points = svg.querySelector('polygon').getAttribute('points');// 获取 SVG 中的 points 属性
+        
+        var coords = points.split(' ').map(function (point) {// 将 points 属性转换为坐标数组
+            return point.split(',').map(function (coord) {
+                return parseFloat(coord);
+            });
+        });
+
+        // 绘制路径
+        ctx.beginPath();
+        coords.forEach(function (coord, index) {
+            if (index === 0) {
+                ctx.moveTo(coord[0], coord[1]);
+            } else {
+                ctx.lineTo(coord[0], coord[1]);
+            }
+        });
+        ctx.closePath();
+        ctx.stroke();
+    </script> -->
+</body>
+
+</html>
