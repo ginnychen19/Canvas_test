@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/jquery-3.6.0.js"></script>
+    <!-- 好用的拖拉套件 -->
+    <script src="https://unpkg.com/draggabilly@3/dist/draggabilly.pkgd.min.js"></script>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="./css/cakeGame.css">
+    <title>Document</title>
+</head>
+
+<body class="flex-center">
+    <nav class="flex-R">
+        <div class="flex-R flex-center nav1">
+            <img class="icon pastry-bag svg" src="./Source/SVG/pastry-bag.svg" alt="奶油">
+            <input id="drawColor" type="color" value="#56220B">
+            <div>
+                <img class="icon cream svg" src="./Source/SVG/cream.svg" alt="2px">
+                <img class="icon cream svg" src="./Source/SVG/cream.svg" alt="4px">
+                <img class="icon cream svg" src="./Source/SVG/cream.svg" alt="7px">
+                <img class="icon cream svg" src="./Source/SVG/cream.svg" alt="10px">
+            </div>
+            <img class="icon eraser svg" src="./Source/SVG/eraser.svg" alt="橡皮擦">
+        </div>
+        <div class="flex-R flex-center">
+            <img class="icon cake svg" src="./Source/SVG/cake.svg" alt="蛋糕">
+            <label>顏色：</label>
+            <select id="cakeColor">
+                <option value="cake_White">白色</option>
+                <option value="cake_cream">米色</option>
+                <option value="cake_coffee">咖啡色</option>
+                <option value="cake_Black">黑色</option>
+                <option value="cake_Red">紅色</option>
+                <option value="cake_Orange">橙色</option>
+                <option value="cake_Yellow">黃色</option>
+                <option value="cake_Green">綠色</option>
+                <option value="cake_Blue">藍色</option>
+                <option value="cake_Indigo">靛色</option>
+                <option value="cake_Purple">紫色</option>
+            </select>
+            <!--之後可以看要不要有形狀-->
+        </div>
+    </nav>
+    <main id="imageDIV" class="">
+        <canvas id="draw-cake"></canvas>
+        <div id="cake-decoration">
+            <!--這裡用來生成抓取物件-->
+        </div>
+        <div id="cake-display">
+            <img class="cakePIC" src="./Source/SVG/game/cake_White.svg">
+            <img class="platePIC" src="./Source/SVG/game/parchmentPaper.svg">
+            <img class="tablePIC" src="./Source/SVG/game/table.svg">
+            <!--裡面放蛋糕底圖、裝飾物底圖-->
+        </div>
+    </main>
+    <button id="download" class="Btn-save">完成</button><!--用畫面轉畫布儲存-->
+    <div id="output"></div>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

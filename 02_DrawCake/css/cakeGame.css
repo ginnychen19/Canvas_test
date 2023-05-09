@@ -1,0 +1,239 @@
+@font-face {
+    font-family: "GenJyuuGothic-L";
+    src: url("../Source/ttc/GenSenRounded-L.ttc");
+}
+
+@font-face {
+    font-family: "GenJyuuGothic-B";
+    src: url("../Source/ttc/GenSenRounded-B.ttc")
+}
+
+@font-face {
+    font-family: "GenJyuuGothic-H";
+    src: url("../Source/ttc/GenSenRounded-H.ttc");
+}
+
+:root {
+    --color01: #F7F8F8;
+    --color02: #B5B6B6;
+    --color03: #9FA0A0;
+    --color04: #898989;
+    --color05: #727171;
+    --color06: #525152;
+
+    --sky: #a6dbf5;
+
+    --Green01: #368284;
+    --Green02: #628e59;
+    --Green03: #A3CF78;
+    --Green04: #87c379;
+
+    --YWhite: #f6f3e4;
+    --GWhite: #F7F8F3;
+    --myBG: #fff1c5;
+
+    --BG_LYellow: #f0da99;
+    --BG_LOrange: #F3D1B2;
+    --BG_MOrange: #f7bc88;
+
+    --Brown01: #5c3a31;
+    --Brown02: #835B36;
+    --Brown03: #BB8058;
+
+    --Brown04_BE: #b79779;
+    --Brown05_BEtxt: #876464;
+
+    --BTN_Red: #e3344b;
+    --BTN_Green: #337e47;
+    --BTN_Yellow: #f39800;
+    --BTN_Blue: #0061f3;
+
+    --pLabel: 80px;
+    --pBTitle: 58px;
+    --pMTitle: 40px;
+    --pSTitle: 28px;
+    --pContent: 18px;
+    --pSContent: 14px;
+
+    --cakePosX: 400px;
+    --cakePosY: 120px;
+
+    --PCgameWidth: 1440px;
+    --PCgameHeight: 720px;
+    --MBgameWidth: 320px;
+    --MBgameHeight: 768px;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--myBG);
+
+    font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
+}
+
+.flex-R {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-C {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    justify-self: center;
+    align-items: center;
+}
+
+.gap-5 {
+    padding: 5px;
+}
+.gap-10 {
+    padding: 10px;
+}
+.gap-15 {
+    padding: 15px;
+}
+
+.icon {width: 100px;}
+.icon.cream:nth-child(1) {width: 20px;}
+.icon.cream:nth-child(2) {width: 25px;}
+.icon.cream:nth-child(3) {width: 30px;}
+.icon.cream:nth-child(4) {width: 35px;}
+.eraser{width: 50px;}
+
+
+label {
+    color: var(--myBG);
+    font-size: var(--pContent);
+}
+
+select {
+    font-size: var(--pContent);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
+    
+    color: var(--Brown01);
+    background-color: var(--myBG);
+    border: none;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    border-radius: 20px;
+    background-color: var(--Brown02);
+    padding: 15px 30px;
+
+    z-index: 20;
+}
+
+.nav1 {
+    margin: 0 30px 0 0;
+}
+
+.nav1>* {
+    margin: 0 15px;
+}
+
+main {
+    position: relative;
+    z-index: 19;
+    width: var(--PCgameWidth);
+    height: var(--PCgameHeight);
+    margin: 50px 0 0 0;
+    background-color: #368284;
+    overflow: hidden;
+
+    border-radius: 50px;
+}
+
+#draw-cake {
+    position: absolute;
+    top: 140px;
+    left: 450px;
+
+    z-index: 2;
+    width: 480px;
+    height: 480px;
+
+    overflow: hidden;
+    /*畫出去的不顯示*/
+
+    border-radius: 50%;
+    border: 10px solid rgb(0, 255, 0);
+}
+
+#cake-decoration {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    width: var(--PCgameWidth);
+    height: var(--PCgameHeight);
+
+    /* border: 2px solid red; */
+}
+
+#cake-display {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 0;
+    width: var(--PCgameWidth);
+    height: var(--PCgameHeight);
+
+    /* border: 10px solid rgb(73, 38, 199); */
+}
+
+.cakePIC {
+    position: absolute;
+    top: var(--cakePosY);
+    left: var(--cakePosX);
+    z-index: 1;
+
+    max-width: 600px;
+}
+
+.platePIC {
+    position: absolute;
+    top: var(--cakePosY);
+    left: var(--cakePosX);
+    z-index: 0;
+
+    max-width: 600px;
+}
+
+.tablePIC {
+    position: absolute;
+    top: 0;
+    left: -125px;
+    z-index: -1;
+    width: 1690px;
+}
+
+.Btn-save {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: var(--pMTitle);
+    font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+
+    background-color: var(--Brown01);
+    color: var(--BG_LOrange);
+    border: none;
+    transition: 0.2s ease-in-out;
+}
+
+.Btn-save:hover {
+    background-color: var(--Brown03);
+    color: var(--GWhite);
+}
+
+.Btn-save:active {
+    box-shadow: 0px 0px 30px 10px var(--Brown01);
+}
