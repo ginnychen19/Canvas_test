@@ -45,7 +45,7 @@
 
     --BTN_Red: #e3344b;
     --BTN_Green: #337e47;
-    --BTN_Yellow: #f39800;
+    --BTN_Yellow: #ffaa16;
     --BTN_Blue: #0061f3;
 
     --pLabel: 80px;
@@ -68,7 +68,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    background-color: var(--myBG);
+    background-color: var(--Brown02);
 
     font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
 }
@@ -91,19 +91,38 @@ body {
 .gap-5 {
     padding: 5px;
 }
+
 .gap-10 {
     padding: 10px;
 }
+
 .gap-15 {
     padding: 15px;
 }
 
-.icon {width: 100px;}
-.icon.cream:nth-child(1) {width: 20px;}
-.icon.cream:nth-child(2) {width: 25px;}
-.icon.cream:nth-child(3) {width: 30px;}
-.icon.cream:nth-child(4) {width: 35px;}
-.eraser{width: 50px;}
+.icon {
+    width: 100px;
+}
+
+.icon.cream:nth-child(1) {
+    width: 20px;
+}
+
+.icon.cream:nth-child(2) {
+    width: 25px;
+}
+
+.icon.cream:nth-child(3) {
+    width: 30px;
+}
+
+.icon.cream:nth-child(4) {
+    width: 35px;
+}
+
+.eraser {
+    width: 50px;
+}
 
 
 label {
@@ -116,7 +135,7 @@ select {
     padding: 5px 10px;
     border-radius: 10px;
     font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
-    
+
     color: var(--Brown01);
     background-color: var(--myBG);
     border: none;
@@ -128,7 +147,11 @@ nav {
     border-radius: 20px;
     background-color: var(--Brown02);
     padding: 15px 30px;
-    
+
+    box-shadow: inset 4px -4px 5px 2px var(--Brown01),
+                inset -2px 2px 5px 2px var(--myBG),
+                      0px 30px 800px -15px var(--BTN_Yellow);
+
 
     z-index: 20;
 }
@@ -147,15 +170,17 @@ main {
     width: var(--PCgameWidth);
     height: var(--PCgameHeight);
     margin: 50px 0 0 0;
-    background-color: #368284;
+    background-color: var(--Brown02);
     overflow: hidden;
 
     border-radius: 50px;
+
 }
+
 
 #draw-cake {
     position: absolute;
-    top: 140px;
+    top: 120px;
     left: 450px;
 
     z-index: 2;
@@ -173,7 +198,10 @@ main {
     z-index: 1;
     width: var(--PCgameWidth);
     height: var(--PCgameHeight);
-
+    box-shadow: inset 6px -6px 10px 5px var(--Brown01),
+        inset -4px 4px 10px 5px var(--myBG),
+        inset 0px 100px 100px 20px var(--BG_LOrange);
+    border-radius: 45px;
     /* border: 2px solid red; */
 }
 
@@ -212,6 +240,7 @@ main {
     left: -125px;
     z-index: -1;
     width: 1690px;
+
 }
 
 .Btn-save {

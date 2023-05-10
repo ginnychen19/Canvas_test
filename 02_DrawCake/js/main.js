@@ -1,4 +1,4 @@
-import { drawCanvas } from './draw.js';
+import { drawCanvas } from './drawL.js';
 // 我不能加上 $('document').on('ready', function () { })
 
 /* 01. 我把功能都放到svg轉好再做*/
