@@ -1,6 +1,7 @@
-import { drawCanvas } from './drawL.js';
-// 我不能加上 $('document').on('ready', function () { })
+import { drawCanvas } from './draw.js';
+import { dragDecoration } from './drag.js';
 
+// 我不能加上 $('document').on('ready', function () { })
 /* 01. 我把功能都放到svg轉好再做*/
 /* 02. 把所有img引入的svg在網頁上轉換成svg */
 function replaceSvgImages() {
@@ -43,15 +44,33 @@ function replaceSvgImages() {
 }
 /* 03. 调用 replaceSvgImages() 方法并在所有 SVG 替换完成后执行回调函数*/
 replaceSvgImages().then(function () {
-    const drawCanva = new drawCanvas();//我一樣要再轉換完過後才可以做這件事。
     console.log('All SVG images have been replaced!');
-    // console.log(drawCanva);
+    const drawCanva = new drawCanvas();//我一樣要再轉換完過後才可以做這件事。
+    const MydragDecoration = new dragDecoration();
+    const decoration = $(".decoration");
+    const backToDraw = $(".pastry-bag02");
+    const goToDrag = $(".drag");
 
     drawCanva.CreamColorChange();//換奶油顏色
     drawCanva.CreamSizeChange();//換奶油大小
     drawCanva.draw();//換奶油大小
     drawCanva.useEraser();//橡皮擦功能切換
     drawCanva.CakeColorChange();//換蛋糕顏色
+
+    /* 裝飾功能 */
+    MydragDecoration.useRubbish();
+    decoration.on("click", (e) => {
+        closeDrawNav();
+        MydragDecoration.ClickDecoration(e);
+    });
+
+
+    backToDraw.on("click", (e) => {
+        openDrawNav();
+    });
+    goToDrag.on("click", (e) => {
+        closeDrawNav();
+    });
 
     saveMyCake();//儲存畫布
 })
@@ -85,5 +104,37 @@ var saveMyCake = () => {
     });
 }
 
+/* 介面互動相關 */
+var closeDrawNav = () => {
+    $("#touch-draw").removeClass("open").addClass("close");
+    $(".nav1").removeClass("open").addClass("close");
+    $(".nav2").removeClass("close").addClass("open");
+}
+var openDrawNav = () => {
+    $("#touch-draw").removeClass("close").addClass("open");
+    $(".nav2").removeClass("open").addClass("close");
+    $(".nav1").removeClass("close").addClass("open");
+}
 
+var removeDecoration = () => {//draggable 在click的狀態下刪除
+    const self = this;
+    const copy = $(".copy")
+    // this.draggie.on('staticClick', function () {
+    //     console.log(draggie);
+    // });
+
+    copy.on("click", function (e) {//click事件近不來ㄝ
+        console.log(copy);
+
+
+        // if (!self.delete) {//如果不是delete狀態就不作用
+        //     return;
+        // } else {
+        //     console.log("draggable click");
+        //     $(e.target).removeClass("draggable");
+        //     $(e.target).remove();
+        // }
+    })
+}
+removeDecoration();
 

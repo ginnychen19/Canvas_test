@@ -1,13 +1,14 @@
 body { font-family: sans-serif; }
 
 .draggable {
-  width: 140px;
-  height: 140px;
-  background: #F90;
-  border-radius: 10px;
+  /* width: 60px;
+  height: 140px; */
+  /* background: #F90; */
+  border-radius: 50%;
   cursor: move;
+  overflow:visible;
 }
 .draggable.is-pointer-down {
-  background: #09F;
+  background: rgb(252, 255, 99);
 }
-.draggable.is-dragging { opacity: 0.7; }
+.draggable.is-dragging { opacity: 0.5; }

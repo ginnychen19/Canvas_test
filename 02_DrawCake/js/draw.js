@@ -1,8 +1,11 @@
 /* 畫布處理區塊 */
+var _canvas02 = document.getElementById('touch-draw');
 var _canvas = document.getElementById('draw-cake');
 var ctx = _canvas.getContext('2d');
-_canvas.width = 500;
-_canvas.height = 600;
+_canvas.width = 510;
+_canvas.height = 550;
+_canvas02.width = 510;
+_canvas02.height = 550;
 
 //奶油大小和橡皮擦的事件再replaceSvgImages()完成後做。
 export class drawCanvas {
@@ -18,7 +21,6 @@ export class drawCanvas {
         this.color02 = "#000000";
         this.scale = 1;
     }
-
     CreamColorChange() {/*換奶油顏色*/
         /* 因為我希望this指的要是 drawCanvas，所以用bind */
         this.drawColor.addEventListener("change", function (e) {
@@ -59,14 +61,14 @@ export class drawCanvas {
         var canterX = 30;
         var canterY = 30;
 
-        $(_canvas).on("mousedown", openCvs);
-        $(_canvas).on("mouseup", closeCvs);
+        $(_canvas02).on("mousedown", openCvs);
+        $(_canvas02).on("mouseup", closeCvs);
 
         function openCvs() {
-            _canvas.addEventListener("mousemove", clickCvs);
+            _canvas02.addEventListener("mousemove", clickCvs);
         }
         function closeCvs() {
-            _canvas.removeEventListener("mousemove", clickCvs);
+            _canvas02.removeEventListener("mousemove", clickCvs);
         }
         function clickCvs(e) {
             /* 獲得滑鼠之於canvas的位置 */
@@ -120,6 +122,18 @@ export class drawCanvas {
             }
             ctx.restore();
         }
+    }
+    useUndo() {
+        const self = this;
+        this.eraser.on("click", function (e) {
+            if (!self.isEraser) {
+                self.isEraser = true;
+            } else {
+                self.isEraser = false;
+            }
+            // console.log(self.eraser.find("path"));
+            $(self.eraser).find("path").toggleClass("checked");
+        });
     }
     CakeColorChange() {/*換蛋糕顏色*/
         this.cakeColor.addEventListener("change", (e) => {
