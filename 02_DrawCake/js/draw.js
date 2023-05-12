@@ -2,6 +2,7 @@
 var _canvas02 = document.getElementById('touch-draw');
 var _canvas = document.getElementById('draw-cake');
 var ctx = _canvas.getContext('2d');
+ctx.canvas.willReadFrequently = true;
 _canvas.width = 510;
 _canvas.height = 550;
 _canvas02.width = 510;
@@ -17,9 +18,12 @@ export class drawCanvas {
         this.cream = $('.cream');
         this.eraser = $('.eraser');
         this.isEraser = false;
+        this.undo = $('.undo');
         this.color = this.drawColor.value;
         this.color02 = "#000000";
         this.scale = 1;
+        this.restore_array = [];
+        this.undoIndex = -1;
     }
     CreamColorChange() {/*換奶油顏色*/
         /* 因為我希望this指的要是 drawCanvas，所以用bind */
@@ -69,6 +73,14 @@ export class drawCanvas {
         }
         function closeCvs() {
             _canvas02.removeEventListener("mousemove", clickCvs);
+            /* 加入到陣列 */
+            self.restore_array.push(ctx.getImageData(0, 0, _canvas.width, _canvas.height));
+            self.undoIndex += 1;
+            if(self.restore_array.length>=5){//只儲存5部
+                self.undoIndex = 4;
+                self.restore_array.shift();
+            }
+            console.log(self.restore_array);
         }
         function clickCvs(e) {
             /* 獲得滑鼠之於canvas的位置 */
@@ -125,14 +137,17 @@ export class drawCanvas {
     }
     useUndo() {
         const self = this;
-        this.eraser.on("click", function (e) {
-            if (!self.isEraser) {
-                self.isEraser = true;
-            } else {
-                self.isEraser = false;
+        this.undo.on("click", function (e) {
+            console.log("我來了");
+            if(self.undoIndex <= 0){
+                self.undoIndex = -1;
+                return
+            }else{
+                self.undoIndex -=1;
+                self.restore_array.pop();
+                ctx.putImageData(self.restore_array[self.undoIndex],0,0);
+                
             }
-            // console.log(self.eraser.find("path"));
-            $(self.eraser).find("path").toggleClass("checked");
         });
     }
     CakeColorChange() {/*換蛋糕顏色*/

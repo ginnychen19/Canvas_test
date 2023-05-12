@@ -134,11 +134,16 @@ body {
     width: 35px;
 }
 
-.eraser,.undo,.drag {
+.eraser,
+.undo,
+.drag {
     width: 50px;
     transition: 0.1s ease-in-out;
 }
-.eraser:active,.undo:active,.drag:active {
+
+.eraser:active,
+.undo:active,
+.drag:active {
     transform: rotate(-30deg);
 }
 
@@ -161,15 +166,73 @@ select {
 
 /*對話框*/
 .dialog {
-    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
     top: 0px;
+    padding: 200px;
 
-    border: 60px solid saddlebrown;
-
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 30;
 }
 
+.gift {
+    width: 200px;
+}
 
+.textAni {
+    font-size: var(--pBTitle);
+    margin: 50px;
+    color: var(--myBG);
+}
+
+.letter {
+    animation: bounce 0.75s cubic-bezier(0.05, 0, 0.2, 1) infinite alternate;
+    display: inline-block;
+    transform: translate3d(0, 0, 0);
+}
+
+.letter:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.letter:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.letter:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.letter:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.letter:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.letter:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.letter:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.letter:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, -20px, 0);
+    }
+}
 
 nav {
     position: fixed;
@@ -186,20 +249,59 @@ nav {
     z-index: 20;
 }
 
-.nav1,.nav2 {
+
+
+.swing {
+    animation: swing 3.0s ease infinite alternate;
+    animation-delay: 1.0s;
+}
+
+@keyframes swing {
+    20% {
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg)
+    }
+
+    40% {
+        -webkit-transform: rotate(-10deg);
+        transform: rotate(-10deg)
+    }
+
+    60% {
+        -webkit-transform: rotate(5deg);
+        transform: rotate(5deg)
+    }
+
+    80% {
+        -webkit-transform: rotate(-5deg);
+        transform: rotate(-5deg)
+    }
+
+    to {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+}
+
+
+.nav1,
+.nav2 {
     margin: 0 30px 0 0;
 }
 
-.nav1>*,.nav2>* {
+.nav1>*,
+.nav2>* {
     margin: 0 15px;
 }
 
-.trash-can,.pastry-bag02{
+.trash-can,
+.pastry-bag02 {
     width: 50px;
     transition: 0.1s ease-in-out;
 }
 
-.trash-can:active,.pastry-bag02:active {
+.trash-can:active,
+.pastry-bag02:active {
     transform: rotate(-30deg);
 }
 
@@ -229,7 +331,8 @@ main {
     border-radius: 50%;
     /* border: 10px solid rgb(0, 255, 0); */
 }
-#touch-draw{
+
+#touch-draw {
     position: absolute;
     top: 120px;
     left: 430px;

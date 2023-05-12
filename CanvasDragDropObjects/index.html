@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,43 @@
     <link rel="stylesheet" href="./main.css">
     <title>Document</title>
 </head>
+
 <body style="margin: 0; padding: 100px;">
-    
-    
+
+
     <canvas id="canvas"></canvas>
-    <script src="./main.js"></script>
+    <!-- <script src="./main.js"></script> -->
+    <script>
+        var bb = {
+            0: "a",
+            1: "b",
+            2: "c",
+        };
+        var aa = [bb[0], bb[1], bb[2]];
+
+
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
+        aa = shuffle(aa);
+        console.log(aa);
+    </script>
 </body>
+
 </html>

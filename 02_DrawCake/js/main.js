@@ -50,25 +50,25 @@ replaceSvgImages().then(function () {
     const decoration = $(".decoration");
     const backToDraw = $(".pastry-bag02");
     const goToDrag = $(".drag");
+    const draggable = $(".draggable");
 
     drawCanva.CreamColorChange();//換奶油顏色
     drawCanva.CreamSizeChange();//換奶油大小
     drawCanva.draw();//換奶油大小
+    drawCanva.useUndo();
     drawCanva.useEraser();//橡皮擦功能切換
     drawCanva.CakeColorChange();//換蛋糕顏色
 
     /* 裝飾功能 */
     MydragDecoration.useRubbish();
-    decoration.on("click", (e) => {
+    decoration.on("mousedown", (e) => {
         closeDrawNav();
-        MydragDecoration.ClickDecoration(e);
     });
-
-
-    backToDraw.on("click", (e) => {
+    MydragDecoration.ClickDecoration();
+    backToDraw.on("mousedown", (e) => {
         openDrawNav();
     });
-    goToDrag.on("click", (e) => {
+    goToDrag.on("mousedown", (e) => {
         closeDrawNav();
     });
 
@@ -79,6 +79,8 @@ replaceSvgImages().then(function () {
 var saveMyCake = () => {
     var element = document.getElementById('imageDIV');
     $("#download").on('click', function () {
+        /* 把介面開起來 */
+        $('.dialog').removeClass("close").addClass("open");
         var options = {
             // 指定要裁剪的範圍
             width: 1440,
@@ -89,7 +91,10 @@ var saveMyCake = () => {
             }
         };
         domtoimage.toPng(element, options)
-            .then(function (dataUrl) {
+            .then(function (dataUrl) {//做完時
+                /* 介面關閉 */
+                $('.dialog').find("h6").html("完成拉~");
+                closeDialog();
                 var link = document.createElement('a');
                 link.download = 'image.png';
                 link.href = dataUrl;
@@ -105,6 +110,15 @@ var saveMyCake = () => {
 }
 
 /* 介面互動相關 */
+var closeDialog = () => {
+    $('.dialog').on("click", (e) => {
+        if ($(e.target).is("img") || $(e.target).is("h6")) {
+            return;
+        } else {
+            $('.dialog').removeClass("open").addClass("close");
+        }
+    });
+}
 var closeDrawNav = () => {
     $("#touch-draw").removeClass("open").addClass("close");
     $(".nav1").removeClass("open").addClass("close");
@@ -115,26 +129,3 @@ var openDrawNav = () => {
     $(".nav2").removeClass("open").addClass("close");
     $(".nav1").removeClass("close").addClass("open");
 }
-
-var removeDecoration = () => {//draggable 在click的狀態下刪除
-    const self = this;
-    const copy = $(".copy")
-    // this.draggie.on('staticClick', function () {
-    //     console.log(draggie);
-    // });
-
-    copy.on("click", function (e) {//click事件近不來ㄝ
-        console.log(copy);
-
-
-        // if (!self.delete) {//如果不是delete狀態就不作用
-        //     return;
-        // } else {
-        //     console.log("draggable click");
-        //     $(e.target).removeClass("draggable");
-        //     $(e.target).remove();
-        // }
-    })
-}
-removeDecoration();
-
