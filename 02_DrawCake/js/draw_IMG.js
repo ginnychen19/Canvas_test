@@ -42,10 +42,10 @@ export class drawCanvas {
     CreamSizeChange() {//奶油按鈕事件控制
         const self = this; // 保存class的this
 
-        this.cream.eq(0).attr("aria-label", "0.2");
-        this.cream.eq(1).attr("aria-label", "0.4");
-        this.cream.eq(2).attr("aria-label", "0.7");
-        this.cream.eq(3).attr("aria-label", "1.0");
+        this.cream.eq(0).attr("aria-label", "0.1");
+        this.cream.eq(1).attr("aria-label", "0.3");
+        this.cream.eq(2).attr("aria-label", "0.6");
+        this.cream.eq(3).attr("aria-label", "0.9");
 
         this.cream.eq(3).find("path").addClass("checked"); //預設選中
         this.cream.on("click", function (e) {
@@ -68,8 +68,8 @@ export class drawCanvas {
     }
     draw = () => {//畫奶油
         const self = this; // 保存class的this
-        var canterX = 30;
-        var canterY = 30;
+        var canterX = 25;
+        var canterY = 25;
         $(_canvas02).on("mousedown", openCvs);
         $(_canvas02).on("mouseup", closeCvs);
 
@@ -83,7 +83,7 @@ export class drawCanvas {
         }
         function closeCvs(e) {
             _canvas02.removeEventListener("mousemove", clickCvs);
-            _canvas02.removeEventListener("touchmove", clickCvs02);
+            _canvas02.removeEventListener("touchmove", clickCvs02, { passive: true });
             /* 加入到陣列 */
             console.log(self.undoIndex);
             self.undoIndex += 1;
@@ -99,9 +99,7 @@ export class drawCanvas {
             /*e.client就直接是滑鼠與目前瀏覽器的距離*/
             var x = e.touches[0].clientX - canvasOffsetX;
             var y = e.touches[0].clientY - canvasOffsetY;
-            console.log(x);
-            console.log(y);
-            drawCream(x, y);
+            drawCream(x, y)
         }
         function clickCvs(e) {
             /* 獲得滑鼠之於canvas的位置 */
@@ -129,7 +127,8 @@ export class drawCanvas {
             }
             ctx.drawImage(self.img,
                 0, 0, 490, 490,
-                x, y, 60, 60
+                x - canterX*self.scale, y - canterY*self.scale,
+                50*self.scale , 50*self.scale 
             );
             ctx.restore();
         }
@@ -140,24 +139,6 @@ export class drawCanvas {
             self.undoIndex = self.undoIndex - 1;
             self.restore_array.pop();
             ctx.putImageData(self.restore_array[self.undoIndex], 0, 0);
-            // if (self.undoIndex < 0) {
-            //     console.log("<0");
-            //     return;
-            // } else if (self.undoIndex = 0) {
-            //     self.undoIndex = -1;
-            //     console.log(self.undoIndex);
-            //     self.restore_array = [""];
-            //     console.log("我空了" + self.restore_array);
-            //     ctx.putImageData(imageData00, 0, 0);
-            // } else {
-            //     self.undoIndex = self.undoIndex - 1;
-            //     console.log(self.undoIndex);
-            //     if (self.restore_array.length > 1) { // 檢查陣列是否大於 1
-            //         self.restore_array.pop();
-            //         ctx.putImageData(self.restore_array[self.undoIndex], 0, 0);
-            //     }
-            //     console.log(self.restore_array);
-            // }
         });
     }
     CakeColorChange() {/*換蛋糕顏色*/

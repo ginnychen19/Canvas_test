@@ -1,4 +1,4 @@
-import { drawCanvas } from './draw.js';
+import { drawCanvas } from './draw_IMG.js';
 import { dragDecoration } from './drag.js';
 
 // 我不能加上 $('document').on('ready', function () { })
@@ -78,41 +78,44 @@ replaceSvgImages().then(function () {
 /* 儲存畫布按鈕 */
 var saveMyCake = () => {
     var element = document.getElementById('imageDIV');
-    $("#download").on('click', function () {
-        /* 把介面開起來 */
-        $('.dialog').removeClass("close").addClass("open");
-        var options = {
-            // 指定要裁剪的範圍
-            width: 1440,
-            height: 1440,//780大概是底
-            style: {//笑死結果最後硬幹出來，可是如果要讓移動端也能用就要另外想辦法了
-                "transform-origin": "680px 200px",
-                scale: "2.3",
-            }
-        };
-        domtoimage.toPng(element, options)
-            .then(function (dataUrl) {//做完時
-                /* 介面關閉 */
-                $('.dialog').find("h6").html("完成拉~");
-                closeDialog();
-                var link = document.createElement('a');
-                link.download = 'image.png';
-                link.href = dataUrl;
-                link.click();
+    /* 加入文字 */
+    $('.dialog').find("h6").html('<span class="letter">包</span><span class="letter">裝</span><span class="letter">i</span><span class="letter">n</span><span class="letter">g</span><span class="letter">.</span><span class="letter">.</span><span class="letter">.</span>');
 
-                var newWindow = window.open();
-                newWindow.document.body.innerHTML = '<img src="' + dataUrl + '">';
-            })
-            .catch(function (error) {
-                console.error('oops, something went wrong!', error);
-            });
-    });
+    $("#download").on('click', function () {
+            /* 把介面開起來 */
+            $('.dialog').removeClass("close").addClass("open");
+            var options = {
+                // 指定要裁剪的範圍
+                width: 1440,
+                height: 1440,//780大概是底
+                style: {//笑死結果最後硬幹出來，可是如果要讓移動端也能用就要另外想辦法了
+                    "transform-origin": "680px 200px",
+                    scale: "2.3",
+                }
+            };
+            domtoimage.toPng(element, options)
+                .then(function (dataUrl) {//做完時
+                    /* 介面關閉 */
+                    $('.dialog').find("h6").html('<span class="letter">完</span><span class="letter">成</span><span class="letter">拉</span><span class="letter">~</span>');
+                    closeDialog();
+                    var link = document.createElement('a');
+                    link.download = 'image.png';
+                    link.href = dataUrl;
+                    link.click();
+
+                    var newWindow = window.open();
+                    newWindow.document.body.innerHTML = '<img src="' + dataUrl + '">';
+                })
+                .catch(function (error) {
+                    console.error('oops, something went wrong!', error);
+                });
+        });
 }
 
 /* 介面互動相關 */
 var closeDialog = () => {
     $('.dialog').on("click", (e) => {
-    
+
         if ($(e.target).is("img") || $(e.target).is("h6")) {
             return;
         } else {

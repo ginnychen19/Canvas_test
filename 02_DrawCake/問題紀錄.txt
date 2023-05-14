@@ -1,0 +1,114 @@
+PC端
+01.上一步效能問題不夠好
+02.手繪板下筆太快會造成點有空洞
+
+
+手機端
+01.版面不對
+02.裝飾品在刪除模式下會無法靠點擊刪除
+03.無法直接保存圖片(更不會開新分頁)
+
+=========================================
+喔嗚！各位母親節快樂~~
+
+和大家分享一下，我開發了個畫母親節蛋糕的小遊戲~
+https://ginnychen19.github.io/DrawCake/game.html
+歡迎大家來試試看，幫我debug(?
+或是看一下我的使用者體驗是否設計的讓你不習慣XD
+
+【可玩性】
+可以自由上色和放裝飾品~
+畫完之後，點完成按鈕可以保存你做好的蛋糕喔！
+
+【備註】
+推薦使用電腦開啟，可以支援電繪版
+手機上也可以畫，但我沒有切手機的板，而且問題好像比較多，目前不推薦使用
+
+【使用套件】
+01.dom to img =>用canvas2image時發現有position設定都會跑掉qq，所以就用這個
+02.draggabilly =>這個超方便，又輕量，可以讓物件有可重複抓放到任一位置的特性。
+
+【心得】
+開發了快一個禮拜，效能問題真的是比較麻煩的部分啊
+因為加了上一步功能，所以我畫的每一筆畫面都要被緩存
+然後我的筆刷又不是單純的圓，所以就要耗比較多空間
+現在真的是深刻體會到為何美術和程式人員會打架XDDD
+
+不過這次也學到滿多！
+一開始在流程上其實我也糾結滿久的
+當時設計前，我預計蛋糕要可以drag&drop的放裝飾、用畫筆畫奶油
+
+但是我希望
+01.奶油可以擦除，但是不會擦到裝飾品(只放一個圖層會全部被擦除)
+02.裝飾品如果在畫奶油之前放，奶油會遮住，但裝飾品如果在畫奶油之後放也要能遮住奶油
+03.裝飾品要可以重複抓放。
+
+如果分兩個canvas的話處理起來比較簡單，
+但奶油或裝飾品會永遠擋在上面，但我要越後面建立的東西在越上面
+
+所以當時有想過，如果要放在同一個圖層的話
+還是我把每次放上蛋糕裝飾或畫出的奶油放到陣列裡，每個物件都有X、Y的資訊
+讓這張畫布每次點擊開始時，都去更新，把陣列上還有的東西畫一次。
+如果選擇擦除時，碰到的物件是奶油的話才執行clearRact。
+(但這如果奶油蓋在裝飾上，奶油和裝飾交疊的那塊感覺有可能還是會一起被擦除)
+
+但和同事們討論執行性後，最終還是決定用我確定能做得出來的方式開發XD
+
+所以我讓裝飾品不是用Canvas畫，而是用html物件改變position的方式
+分兩層，一個處理畫奶油、一個處理裝飾品
+用裝飾品時 => 關閉畫布監聽位置的介面，讓我可以在蛋糕上重複抓取
+畫奶油時 => 分成監聽位置層和實際繪製層，這樣就可以讓我的裝飾品在上，奶油在下，但又不會影響畫布監聽
+
+另外我也發現到除了用clearRact做橡皮擦外，也可以用canvas的合成模式做(讓我的橡皮擦可以是特殊形狀而非方形XD)
+也是挺有趣的。
+
+Oh! Happy Mother's Day, everyone!
+
+I would like to share with you all a little game I developed for drawing Mother's Day cakes.
+You can try it out at 
+https://ginnychen19.github.io/DrawCake/game.html
+
+Feel free to debug it for me or let me know if the user experience is not user-friendly XD.
+
+【Playability】
+You can freely color and decorate the cake as you like.
+Once you're done, you can save the cake you've made by clicking the "Finish" button!
+
+【Note】
+It is recommended to use a computer to open the game as it supports the graphics tablet. 
+You can also draw on your phone, but I haven't optimized it for mobile devices, and there may be more issues. Therefore, I do not currently recommend using it on a phone.
+
+【Used packages】
+01. dom-to-img: Used because I found that when using Canvas2Image, if use css position settings would be wrong. So, I used this package instead.
+02. Draggabilly: This package is super convenient, lightweight, and enables objects to be repeatedly picked up and placed in any position.
+
+【Experience】
+I developing for it almost a week, and performance issues have been the most troublesome part. 
+Since I added the previous step feature, every stroke I drew had to be cached. 
+Also, my brush is not a simple circle, so it requires more cache space. 
+Now I understand why artists and programmers will fight XDDD.
+
+But I also learned a lot this time! Initially, I struggled with the workflow for a while. 
+Before developing, I planned to make the cake decorations drag & drop and draw cream with a brush.
+
+But I wanted:
+01. The cream to be erasable, but not erase the decorations (one layer would erase everything).
+
+02. The decorations should cover the cream if they were placed before drawing the cream, and also cover the cream if they were placed after drawing the cream.
+03. The decorations will be draggable and placed repeatedly.
+
+If I separated them into two canvases, it would be easier to handle, but the cream or decorations would always be on top.
+and I wanted the latest object to be on top.
+
+So I thought that if I put everything on the same layer, I could store every time I placed a decoration or drew cream in an array, with X and Y coordinates for each object. 
+Each time I draw on the canvas, the array would be updated, and the objects in  array would be drawn again. 
+If I selected erasing, I would execute clearRect only if the object was cream. (But if the cream overlapped the decoration, that area might still be erased together).
+
+However, after discussing the performance with my colleagues, we ultimately decided to use the method that I could confidently develop.
+
+Therefore, I used the position attribute of HTML objects instead of Canvas to draw the decorations, with two layers, one for drawing cream and the other for drawing decorations. 
+When using the decorations, I turned off the canvas's position listening interface, so I could repeatedly grab them on the cake.
+ When drawing cream, I divided it into a layer for position listening and another for actual drawing. This way, my decorations were on top, and cream was on the bottom, but it did not affect the canvas position listening.
+
+Besides, I also found out that if i want make an eraser I could use the canvas blending mode instead of clearRect (so my eraser could have a special shape instead of a square XD). 
+It was quite interesting. 

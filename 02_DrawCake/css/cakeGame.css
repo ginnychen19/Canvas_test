@@ -1,11 +1,5 @@
 @import "./position.css";
 
-@font-face {
-    font-family: "GenJyuuGothic-B";
-    src: url("../Source/ttc/GenSenRounded-B.ttc")
-}
-
-
 :root {
     --color01: #F7F8F8;
     --color02: #B5B6B6;
@@ -67,7 +61,7 @@ body {
     flex-direction: column;
     background-color: var(--Brown02);
 
-    font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Microsoft JhengHe','Courier New', Courier, monospace;
 
     background-image: radial-gradient(var(--Brown03) 4px, transparent 2px), radial-gradient(var(--Brown03) 4px, transparent 2px);
     background-size: calc(20 * 3px) calc(20 * 3px);
