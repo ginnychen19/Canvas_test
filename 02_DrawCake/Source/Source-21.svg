@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="_圖層_5" data-name="圖層 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32.81 32.81">
+<svg id="drawCream" class="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32.81 32.81">
   <defs>
     <style>
       .cls-1 {
-        fill: url(#_未命名漸層_40);
+        fill: #633576;
       }
     </style>
-    <radialGradient id="_未命名漸層_40" data-name="未命名漸層 40" cx="19.58" cy="10.48" fx="29.29" fy="10.48" r="22.38" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#fff"/>
-      <stop offset=".08" stop-color="#f1edf3"/>
-      <stop offset=".53" stop-color="#a58bb0"/>
-      <stop offset=".85" stop-color="#754d86"/>
-      <stop offset="1" stop-color="#633576"/>
-    </radialGradient>
   </defs>
-  <polygon class="cls-1" points="21 0 0 2.66 0 11.89 4.65 32.81 21.84 32.81 32.81 20 32.81 8.11 21 0"/>
+  <polygon class="cls-1" points="21 0 0 2.66 0 11.89"/>
 </svg>

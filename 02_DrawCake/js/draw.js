@@ -7,6 +7,7 @@ _canvas.width = 510;
 _canvas.height = 550;
 _canvas02.width = 510;
 _canvas02.height = 550;
+let imageData00 = ctx.createImageData(_canvas.width, _canvas.height);
 
 //奶油大小和橡皮擦的事件再replaceSvgImages()完成後做。
 export class drawCanvas {
@@ -29,7 +30,6 @@ export class drawCanvas {
         /* 因為我希望this指的要是 drawCanvas，所以用bind */
         this.drawColor.addEventListener("change", function (e) {
             this.color = e.target.value;
-            // console.log(this.color);//顏色會變
         }.bind(this))
     }
     CreamSizeChange() {//奶油按鈕事件控制
@@ -42,7 +42,6 @@ export class drawCanvas {
 
         this.cream.eq(3).find("path").addClass("checked"); //預設選中
         this.cream.on("click", function (e) {
-            console.log($('.checked').not($(this)));
             $(self.cream).find('.checked').not($(this)).removeClass('checked');
             $(this).find("path").toggleClass("checked");
             self.scale = $(this).attr("aria-label");//有送過去！
@@ -68,19 +67,43 @@ export class drawCanvas {
         $(_canvas02).on("mousedown", openCvs);
         $(_canvas02).on("mouseup", closeCvs);
 
-        function openCvs() {
+        $(_canvas02).on("touchstart", openCvs);
+        $(_canvas02).on("touchend", closeCvs);
+
+        function openCvs(e) {
+            e.preventDefault();
             _canvas02.addEventListener("mousemove", clickCvs);
+            _canvas02.addEventListener("touchmove", clickCvs02, { passive: true });
         }
         function closeCvs() {
             _canvas02.removeEventListener("mousemove", clickCvs);
+            _canvas02.removeEventListener("touchmove", clickCvs02);
             /* 加入到陣列 */
-            self.restore_array.push(ctx.getImageData(0, 0, _canvas.width, _canvas.height));
+            console.log(self.undoIndex);
             self.undoIndex += 1;
-            if(self.restore_array.length>=5){//只儲存5部
-                self.undoIndex = 4;
-                self.restore_array.shift();
-            }
-            console.log(self.restore_array);
+            self.restore_array.push(ctx.getImageData(0, 0, _canvas.width, _canvas.height));
+            // if (self.restore_array.length >= 5) {//只儲存5部
+            //     self.undoIndex = 4;
+            //     self.restore_array.shift();
+            // } else {
+            //     self.undoIndex += 1;
+            // }
+            // self.restore_array.push(ctx.getImageData(0, 0, _canvas.width, _canvas.height));
+            // console.log(self.restore_array);
+        }
+        function clickCvs02(e) {
+            // e.preventDefault();
+            /*canvas*/
+            var rect = ctx.canvas.getBoundingClientRect();
+            var canvasOffsetX = rect.left;
+            var canvasOffsetY = rect.top;
+            /* 滑鼠 */
+            /*e.client就直接是滑鼠與目前瀏覽器的距離*/
+            var x = e.touches[0].clientX - canvasOffsetX;
+            var y = e.touches[0].clientY - canvasOffsetY;
+            console.log(x);
+            console.log(y);
+            drawCream(x, y);
         }
         function clickCvs(e) {
             /* 獲得滑鼠之於canvas的位置 */
@@ -138,16 +161,27 @@ export class drawCanvas {
     useUndo() {
         const self = this;
         this.undo.on("click", function (e) {
-            console.log("我來了");
-            if(self.undoIndex <= 0){
-                self.undoIndex = -1;
-                return
-            }else{
-                self.undoIndex -=1;
-                self.restore_array.pop();
-                ctx.putImageData(self.restore_array[self.undoIndex],0,0);
-                
-            }
+            self.undoIndex = self.undoIndex - 1;
+            self.restore_array.pop();
+            ctx.putImageData(self.restore_array[self.undoIndex], 0, 0);
+            // if (self.undoIndex < 0) {
+            //     console.log("<0");
+            //     return;
+            // } else if (self.undoIndex = 0) {
+            //     self.undoIndex = -1;
+            //     console.log(self.undoIndex);
+            //     self.restore_array = [""];
+            //     console.log("我空了" + self.restore_array);
+            //     ctx.putImageData(imageData00, 0, 0);
+            // } else {
+            //     self.undoIndex = self.undoIndex - 1;
+            //     console.log(self.undoIndex);
+            //     if (self.restore_array.length > 1) { // 檢查陣列是否大於 1
+            //         self.restore_array.pop();
+            //         ctx.putImageData(self.restore_array[self.undoIndex], 0, 0);
+            //     }
+            //     console.log(self.restore_array);
+            // }
         });
     }
     CakeColorChange() {/*換蛋糕顏色*/

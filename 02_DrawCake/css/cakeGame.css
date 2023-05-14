@@ -1,19 +1,10 @@
 @import "./position.css";
 
 @font-face {
-    font-family: "GenJyuuGothic-L";
-    src: url("../Source/ttc/GenSenRounded-L.ttc");
-}
-
-@font-face {
     font-family: "GenJyuuGothic-B";
     src: url("../Source/ttc/GenSenRounded-B.ttc")
 }
 
-@font-face {
-    font-family: "GenJyuuGothic-H";
-    src: url("../Source/ttc/GenSenRounded-H.ttc");
-}
 
 :root {
     --color01: #F7F8F8;
@@ -77,6 +68,10 @@ body {
     background-color: var(--Brown02);
 
     font-family: 'GenJyuuGothic-B', 'Arial Narrow', Arial, sans-serif;
+
+    background-image: radial-gradient(var(--Brown03) 4px, transparent 2px), radial-gradient(var(--Brown03) 4px, transparent 2px);
+    background-size: calc(20 * 3px) calc(20 * 3px);
+    background-position: 0 0, calc(10 * 3px) calc(10 * 3px);
 }
 
 .flex-R {
@@ -238,10 +233,10 @@ nav {
     position: fixed;
     top: 0;
     border-radius: 20px;
-    background-color: var(--Brown02);
+    background-color: var(--Brown01);
     padding: 15px 30px;
 
-    box-shadow: inset 4px -4px 5px 2px var(--Brown01),
+    box-shadow: inset 4px -4px 5px 2px var(--Brown02),
         inset -2px 2px 5px 2px var(--myBG),
         0px 30px 800px -15px var(--BTN_Yellow);
 

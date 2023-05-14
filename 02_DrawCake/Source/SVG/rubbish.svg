@@ -7,11 +7,11 @@
       }
 
       .cls-0:hover {
-        fill: #f39800;
+        fill: #BB8058;
       }
 
       .checked {
-        fill: rebeccapurple !important;
+        fill: #fbaa31 !important;
       }
     </style>
     <filter id="inset-shadow">

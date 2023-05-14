@@ -112,6 +112,7 @@ var saveMyCake = () => {
 /* 介面互動相關 */
 var closeDialog = () => {
     $('.dialog').on("click", (e) => {
+    
         if ($(e.target).is("img") || $(e.target).is("h6")) {
             return;
         } else {
